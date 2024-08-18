@@ -1,19 +1,16 @@
+import json
 from enum import Enum
+from pathlib import Path
+from typing import Optional, TypeVar
+
 from pydantic import Field
 from speckle_automate import AutomateBase
+from speckle_automate.runner import AutomateGenerateJsonSchema
 
 
 class ExportFormat(Enum):
     GLTF = "gltf"
     GLB = "glb"
-
-
-def create_one_of_enum(enum_cls):
-    """
-    Helper function to create a JSON schema from an Enum class.
-    This is used for generating user input forms in the UI.
-    """
-    return [{"const": item.value, "title": item.name} for item in enum_cls]
 
 
 class FunctionInputs(AutomateBase):
@@ -23,12 +20,23 @@ class FunctionInputs(AutomateBase):
         default=ExportFormat.GLTF,
         title="Export Format",
         description="The format of the exported file: 'gltf' or 'glb'",
-        json_schema_extra={
-            "oneOf": create_one_of_enum(ExportFormat),
-        },
     )
     include_metadata: bool = Field(
         default=False,
         title="Include Metadata",
         description="Whether to include Speckle metadata in the export",
     )
+
+
+def test_generate_schema():
+    input_schema = FunctionInputs
+
+    path = Path("schema.json")
+    schema = json.dumps(
+        input_schema.model_json_schema(
+            by_alias=True, schema_generator=AutomateGenerateJsonSchema
+        )
+        if input_schema
+        else {}
+    )
+    path.write_text(schema)
