@@ -12,7 +12,7 @@ pygltflib = "^1.16.2"
 numpy = "^2.0.1"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.3.0"
+black = "^24.0.0"
 mypy = "^1.3.0"
 ruff = "^0.6.0"
 pydantic-settings = "^2.3.0"
