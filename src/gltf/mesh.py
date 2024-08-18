@@ -39,7 +39,11 @@ def process_speckle_mesh(
     faces = []
     i = 0
     while i < len(speckle_mesh.faces):
-        face_vertex_count = speckle_mesh.faces[i]
+
+        face_vertex_count = (
+            speckle_mesh.faces[i] or 3
+        )  # old displayMeshes used 0 to indicate a triangle, because of course they did
+
         i += 1  # Skip the vertex count
         face_vertex_indices = speckle_mesh.faces[i : i + face_vertex_count]
         face_vertices = [

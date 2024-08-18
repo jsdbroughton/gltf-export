@@ -40,11 +40,16 @@ def create_gltf(speckle_data: Base, include_metadata: bool):
     buffer_data = bytearray()
 
     flattened = list(flatten_base_thorough(speckle_data))
+
     for obj_index, obj in enumerate(flattened):
-        display_value: Base = getattr(obj, "displayValue", None)
+
+        display_value: Base = getattr(obj, "displayValue", None) or getattr(
+            obj, "@displayValue", None
+        )  # old conversions may have used the @displayValue
+
         if isinstance(display_value, list):
             display_meshes = display_value
-        else:
+        else: 
             display_meshes = [display_value]
 
         mesh_indices = []
