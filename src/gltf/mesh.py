@@ -49,8 +49,6 @@ def process_speckle_mesh(
         if face_vertex_count == 3:
             faces.append(face_vertex_indices)
         else:
-            print(f"vertex-count:{face_vertex_count}")
-            print(f"vertices:{face_vertices}")
             triangulated = triangulate_face(face_vertices)
             faces.extend(
                 [[face_vertex_indices[idx] for idx in tri] for tri in triangulated]

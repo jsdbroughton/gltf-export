@@ -42,10 +42,10 @@ def automate_function(
     )
 
     #
-    automate_context.store_file_result(file_name)
-    # # safe_store_file_result(automate_context, file_name)
-    #
-    # # Mark the run as successful
-    # automate_context.mark_run_success(
-    #     f"{function_inputs.export_format.value.upper()} export completed: {file_name}"
-    # )
+    # automate_context.store_file_result(file_name)
+    safe_store_file_result(automate_context, file_name)
+
+    # Mark the run as successful
+    automate_context.mark_run_success(
+        f"{function_inputs.export_format.value.upper()} export completed: {file_name}"
+    )

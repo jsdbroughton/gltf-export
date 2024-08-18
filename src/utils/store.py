@@ -44,8 +44,8 @@ def safe_store_file_result(automate_context: AutomationContext, file_name: str):
 
     try:
         # Modify the URL property of the automation_run_data
-        automate_context.automation_run_data.speckle_server_url = original_url.rstrip(
-            "/"
+        automate_context.automation_run_data.speckle_server_url = (
+            f"{original_url.rstrip('/')}/"
         )
 
         # Attempt to store the file
