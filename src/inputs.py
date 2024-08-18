@@ -31,9 +31,9 @@ class FunctionInputs(AutomateBase):
         default=ExportFormat.GLTF,
         title="Export Format",
         description="The format of the exported file: 'gltf' or 'glb'",
-        json_schema_extra={
-            "oneOf": create_one_of_enum(ExportFormat),
-        },
+        # json_schema_extra={
+        #     "oneOf": create_one_of_enum(ExportFormat),
+        # },
     )
     include_metadata: bool = Field(
         default=False,
@@ -46,10 +46,10 @@ class FunctionInputs(AutomateBase):
     )
 
 
-def test_generate_schema():
+def test_generate_schema(path_given="schema.json"):
     input_schema = FunctionInputs
 
-    path = Path("schema.json")
+    path = Path(path_given)
     schema = json.dumps(
         input_schema.model_json_schema(
             by_alias=True, schema_generator=AutomateGenerateJsonSchema
