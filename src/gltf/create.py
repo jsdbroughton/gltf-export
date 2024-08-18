@@ -64,20 +64,23 @@ def create_primitive(vertices, faces, gltf):
     )
 
     vertices_array = vertices.flatten()
-    vertices_buffer = Buffer(data=vertices_array.tobytes())
+
+    # Create a buffer and append it to the GLTF object
+    vertices_buffer = Buffer()
+    vertices_buffer.uri = None  # Typically, you'd set this if you want an external file
     gltf.buffers.append(vertices_buffer)
 
     vertices_buffer_view = BufferView(
         buffer=len(gltf.buffers) - 1,
         byteOffset=0,
         byteLength=len(vertices_array.tobytes()),
-        target=34962,
+        target=34962,  # GL_ARRAY_BUFFER
     )
     gltf.bufferViews.append(vertices_buffer_view)
 
     vertices_accessor = Accessor(
         bufferView=len(gltf.bufferViews) - 1,
-        componentType=5126,
+        componentType=5126,  # GL_FLOAT
         count=len(vertices),
         type="VEC3",
         max=vertices.max(axis=0).tolist(),
@@ -86,26 +89,32 @@ def create_primitive(vertices, faces, gltf):
     gltf.accessors.append(vertices_accessor)
 
     indices_array = faces.flatten().astype(np.uint32)
-    indices_buffer = Buffer(data=indices_array.tobytes())
+
+    # Create another buffer for indices
+    indices_buffer = Buffer()
     gltf.buffers.append(indices_buffer)
 
     indices_buffer_view = BufferView(
         buffer=len(gltf.buffers) - 1,
         byteOffset=0,
         byteLength=len(indices_array.tobytes()),
-        target=34963,
+        target=34963,  # GL_ELEMENT_ARRAY_BUFFER
     )
     gltf.bufferViews.append(indices_buffer_view)
 
     indices_accessor = Accessor(
         bufferView=len(gltf.bufferViews) - 1,
-        componentType=5125,
+        componentType=5125,  # GL_UNSIGNED_INT
         count=len(indices_array),
         type="SCALAR",
         max=[indices_array.max()],
         min=[indices_array.min()],
     )
     gltf.accessors.append(indices_accessor)
+
+    # Adding data to buffers after they have been initialized
+    gltf.buffers[-2].data = vertices_array.tobytes()
+    gltf.buffers[-1].data = indices_array.tobytes()
 
     return primitive
 
