@@ -16,6 +16,14 @@ class ExportFormat(Enum):
     GLB = "glb"
 
 
+def create_one_of_enum(enum_cls):
+    """
+    Helper function to create a JSON schema from an Enum class.
+    This is used for generating user input forms in the UI.
+    """
+    return [{"const": item.value, "title": item.name} for item in enum_cls]
+
+
 class FunctionInputs(AutomateBase):
     """Input parameters for the GLTF/GLB exporter function."""
 
@@ -23,6 +31,9 @@ class FunctionInputs(AutomateBase):
         default=ExportFormat.GLTF,
         title="Export Format",
         description="The format of the exported file: 'gltf' or 'glb'",
+        json_schema_extra={
+            "oneOf": create_one_of_enum(ExportFormat),
+        },
     )
     include_metadata: bool = Field(
         default=False,
@@ -56,7 +67,6 @@ class AutomateGenerateJsonSchema(GenerateJsonSchema):
 
     def generate(self, schema, mode="validation"):
         json_schema = super().generate(schema, mode=mode)
-
         json_schema["$schema"] = self.schema_dialect
 
         if "properties" in json_schema:
@@ -66,8 +76,8 @@ class AutomateGenerateJsonSchema(GenerateJsonSchema):
                 )
 
         if "$defs" in json_schema:
-            defs = json_schema.pop("$defs")
-            json_schema["$defs"] = defs
+            for def_name, def_schema in json_schema["$defs"].items():
+                self._process_property(def_schema, json_schema["$defs"], None)
 
         return json_schema
 
@@ -81,13 +91,22 @@ class AutomateGenerateJsonSchema(GenerateJsonSchema):
                     property_schema.update(enum_schema)
                     del property_schema["allOf"]
 
+        if "enum" in property_schema:
+            enum_values = property_schema["enum"]
+            property_schema["oneOf"] = [
+                {"const": value, "title": str(value).upper()} for value in enum_values
+            ]
+            del property_schema["enum"]
+
         if isinstance(field, Enum):
-            property_schema["enum"] = [e.value for e in field.__class__]
+            property_schema["oneOf"] = [
+                {"const": item.value, "title": item.name} for item in field.__class__
+            ]
             if "default" in property_schema:
                 property_schema["default"] = property_schema["default"].value
 
         if "type" not in property_schema:
-            if "enum" in property_schema:
+            if "oneOf" in property_schema:
                 property_schema["type"] = "string"
             elif "default" in property_schema:
                 property_schema["type"] = self._infer_type(property_schema["default"])
