@@ -26,6 +26,7 @@ def prep_temp_file(model_name: str, file_extension: str) -> Path:
 def write_gltf_to_tmp(
     gltf_content: GLTF2, model_name: str, export_format: ExportFormat
 ) -> str:
+
     if export_format == ExportFormat.GLB:
         temp_file = prep_temp_file(model_name, ".glb")
         gltf_content.save_binary(temp_file)

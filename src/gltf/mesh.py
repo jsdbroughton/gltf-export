@@ -1,8 +1,11 @@
-from typing import List
+from typing import List, Optional
 
 import numpy as np
 from specklepy.objects import Base
 from specklepy.objects.geometry import Mesh as SpeckleMesh, Vector
+from specklepy.objects.other import Transform
+
+from src.gltf.instances import apply_transformations, safe_apply_transformations
 
 
 def is_speckle_mesh(obj: Base) -> bool:
@@ -19,8 +22,19 @@ def is_speckle_mesh(obj: Base) -> bool:
     )
 
 
-def process_speckle_mesh(speckle_mesh: SpeckleMesh) -> object:
-    vertices = np.array(speckle_mesh.vertices).reshape((-1, 3))
+def process_speckle_mesh(
+    speckle_mesh: SpeckleMesh, transforms: Optional[List[Transform]] = None
+) -> tuple:
+    vertices = np.array(speckle_mesh.vertices, dtype=np.float32).reshape((-1, 3))
+
+    # Apply any transformations if they exist
+    # if transforms:
+    #     vertices = safe_apply_transformations(vertices, transforms)
+
+    # Perform Y/Z swap and negate new Y (old Z)
+    vertices_swapped = vertices[:, [0, 2, 1]]  # Reorder columns to X, Z, Y
+    vertices_swapped[:, 2] *= -1  # Negate the new Z (old Y)
+
     faces = []
     i = 0
     while i < len(speckle_mesh.faces):
@@ -28,7 +42,8 @@ def process_speckle_mesh(speckle_mesh: SpeckleMesh) -> object:
         i += 1  # Skip the vertex count
         face_vertex_indices = speckle_mesh.faces[i : i + face_vertex_count]
         face_vertices = [
-            Vector.from_list(vertices[idx].tolist()) for idx in face_vertex_indices
+            Vector.from_list(vertices_swapped[idx].tolist())
+            for idx in face_vertex_indices
         ]
         if face_vertex_count == 3:
             faces.append(face_vertex_indices)
@@ -38,7 +53,11 @@ def process_speckle_mesh(speckle_mesh: SpeckleMesh) -> object:
                 [[face_vertex_indices[idx] for idx in tri] for tri in triangulated]
             )
         i += face_vertex_count
-    return vertices, np.array(faces)
+
+    # Convert faces to a numpy array with uint32 dtype
+    faces = np.array(faces, dtype=np.uint32)
+
+    return vertices_swapped, faces
 
 
 def area(a, b, c):
