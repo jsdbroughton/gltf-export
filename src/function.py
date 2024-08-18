@@ -7,6 +7,7 @@ from src.gltf.create import (
     create_gltf_from_trimesh,
 )
 from src.inputs import FunctionInputs
+from src.utils.run import get_modelname
 from src.utils.store import safe_store_file_result, write_gltf_to_tmp
 
 
@@ -25,7 +26,7 @@ def automate_function(
     version_root_object: Base = automate_context.receive_version()
 
     # Get the model name from the version
-    model_name: str = getattr(version_root_object, "name", "exported_model")
+    model_name = get_modelname(automate_context)
 
     gltf_data = create_gltf(version_root_object, function_inputs.include_metadata)
 
