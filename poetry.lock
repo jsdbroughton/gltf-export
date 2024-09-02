@@ -989,13 +989,13 @@ files = [
 
 [[package]]
 name = "trimesh"
-version = "4.4.6"
+version = "4.4.8"
 description = "Import, export, process, analyze and view triangular meshes."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "trimesh-4.4.6-py3-none-any.whl", hash = "sha256:f795bac760ef887b5d85b289e9c527f8c929d2e94429688586905660057a1562"},
-    {file = "trimesh-4.4.6.tar.gz", hash = "sha256:b0e64bf060c8d3a7173024fb6fe099f70e7aa306303568882cbac90e6599f45b"},
+    {file = "trimesh-4.4.8-py3-none-any.whl", hash = "sha256:1feb006e13fadbab28527e4f998e181668aebdc6ce5551bd25fa0d22ca5acdec"},
+    {file = "trimesh-4.4.8.tar.gz", hash = "sha256:e8c1d36032c7de9a331a90147d3b19b694dddbc44c8002f41129401a39ec1fce"},
 ]
 
 [package.dependencies]
@@ -1005,7 +1005,7 @@ numpy = ">=1.20"
 all = ["trimesh[deprecated,easy,recommend,test]"]
 deprecated = ["gmsh (==4.12.2)"]
 easy = ["chardet", "colorlog", "embreex", "httpx", "jsonschema", "lxml", "manifold3d (>=2.3.0)", "mapbox-earcut (>=1.0.2)", "networkx", "pillow", "pycollada", "rtree", "scipy", "setuptools", "shapely", "svg.path", "vhacdx", "xatlas", "xxhash"]
-recommend = ["cascadio", "glooey", "meshio", "openctm", "psutil", "pyglet (<2)", "python-fcl", "scikit-image", "sympy"]
+recommend = ["cascadio", "fast-simplification", "glooey", "meshio", "openctm", "psutil", "pyglet (<2)", "scikit-image", "sympy"]
 test = ["coveralls", "ezdxf", "matplotlib", "pyinstrument", "pymeshlab", "pyright", "pytest", "pytest-beartype", "pytest-cov", "ruff"]
 
 [[package]]
