@@ -989,13 +989,13 @@ files = [
 
 [[package]]
 name = "trimesh"
-version = "4.4.8"
+version = "4.4.9"
 description = "Import, export, process, analyze and view triangular meshes."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "trimesh-4.4.8-py3-none-any.whl", hash = "sha256:1feb006e13fadbab28527e4f998e181668aebdc6ce5551bd25fa0d22ca5acdec"},
-    {file = "trimesh-4.4.8.tar.gz", hash = "sha256:e8c1d36032c7de9a331a90147d3b19b694dddbc44c8002f41129401a39ec1fce"},
+    {file = "trimesh-4.4.9-py3-none-any.whl", hash = "sha256:386ddbbb13502e9669deb0a91ea1140d3da1d65326e402c0a16cb737d8c3c704"},
+    {file = "trimesh-4.4.9.tar.gz", hash = "sha256:e9f54cb4ef70f9db49446cad3845b7a8043fc7d62d9192b241741f3fb0d813ac"},
 ]
 
 [package.dependencies]
@@ -1402,4 +1402,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "adeeca926e1b006f7a8dcb74d09e69c79b034bdf3f6e0039ba33225d6cdb5bae"
+content-hash = "14beefebaccad14bf9de47d2e0a4d613ccbdf5d2fc4a33481658b1188efa0be7"
