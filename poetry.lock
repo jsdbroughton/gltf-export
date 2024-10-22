@@ -989,24 +989,25 @@ files = [
 
 [[package]]
 name = "trimesh"
-version = "4.4.8"
+version = "4.5.1"
 description = "Import, export, process, analyze and view triangular meshes."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "trimesh-4.4.8-py3-none-any.whl", hash = "sha256:1feb006e13fadbab28527e4f998e181668aebdc6ce5551bd25fa0d22ca5acdec"},
-    {file = "trimesh-4.4.8.tar.gz", hash = "sha256:e8c1d36032c7de9a331a90147d3b19b694dddbc44c8002f41129401a39ec1fce"},
+    {file = "trimesh-4.5.1-py3-none-any.whl", hash = "sha256:fe2ddcf5b091e4d93bb7b689b947b84ad7a62ca862225f2c70cef1caaac4bd32"},
+    {file = "trimesh-4.5.1.tar.gz", hash = "sha256:2e85179fdbee1e872aa00d42a5b28605a05302968857a8321a4dfa4390725b1c"},
 ]
 
 [package.dependencies]
 numpy = ">=1.20"
 
 [package.extras]
-all = ["trimesh[deprecated,easy,recommend,test]"]
+all = ["trimesh[deprecated,easy,recommend,test,test-more]"]
 deprecated = ["gmsh (==4.12.2)"]
 easy = ["chardet", "colorlog", "embreex", "httpx", "jsonschema", "lxml", "manifold3d (>=2.3.0)", "mapbox-earcut (>=1.0.2)", "networkx", "pillow", "pycollada", "rtree", "scipy", "setuptools", "shapely", "svg.path", "vhacdx", "xatlas", "xxhash"]
-recommend = ["cascadio", "fast-simplification", "glooey", "meshio", "openctm", "psutil", "pyglet (<2)", "scikit-image", "sympy"]
-test = ["coveralls", "ezdxf", "matplotlib", "pyinstrument", "pymeshlab", "pyright", "pytest", "pytest-beartype", "pytest-cov", "ruff"]
+recommend = ["cascadio", "fast-simplification", "meshio", "openctm", "psutil", "pyglet (<2)", "scikit-image", "sympy"]
+test = ["pyinstrument", "pytest", "pytest-cov", "ruff"]
+test-more = ["coveralls", "ezdxf", "matplotlib", "pymeshlab", "pyright", "pytest-beartype", "triangle"]
 
 [[package]]
 name = "typing-extensions"
@@ -1402,4 +1403,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "adeeca926e1b006f7a8dcb74d09e69c79b034bdf3f6e0039ba33225d6cdb5bae"
+content-hash = "14beefebaccad14bf9de47d2e0a4d613ccbdf5d2fc4a33481658b1188efa0be7"
