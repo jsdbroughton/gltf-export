@@ -989,24 +989,25 @@ files = [
 
 [[package]]
 name = "trimesh"
-version = "4.4.8"
+version = "4.12.2"
 description = "Import, export, process, analyze and view triangular meshes."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "trimesh-4.4.8-py3-none-any.whl", hash = "sha256:1feb006e13fadbab28527e4f998e181668aebdc6ce5551bd25fa0d22ca5acdec"},
-    {file = "trimesh-4.4.8.tar.gz", hash = "sha256:e8c1d36032c7de9a331a90147d3b19b694dddbc44c8002f41129401a39ec1fce"},
+    {file = "trimesh-4.12.2-py3-none-any.whl", hash = "sha256:b5b5afa63c5272345f2858f7676bc8c217dc8a89f4fadf6193fe10a81b5ff2aa"},
+    {file = "trimesh-4.12.2.tar.gz", hash = "sha256:c8ca31571ac00b112e4e160e66a2d4c3491df321f056bd33806be0485d1af9d9"},
 ]
 
 [package.dependencies]
 numpy = ">=1.20"
 
 [package.extras]
-all = ["trimesh[deprecated,easy,recommend,test]"]
-deprecated = ["gmsh (==4.12.2)"]
-easy = ["chardet", "colorlog", "embreex", "httpx", "jsonschema", "lxml", "manifold3d (>=2.3.0)", "mapbox-earcut (>=1.0.2)", "networkx", "pillow", "pycollada", "rtree", "scipy", "setuptools", "shapely", "svg.path", "vhacdx", "xatlas", "xxhash"]
-recommend = ["cascadio", "fast-simplification", "glooey", "meshio", "openctm", "psutil", "pyglet (<2)", "scikit-image", "sympy"]
-test = ["coveralls", "ezdxf", "matplotlib", "pyinstrument", "pymeshlab", "pyright", "pytest", "pytest-beartype", "pytest-cov", "ruff"]
+all = ["trimesh[deprecated,easy,recommend,test,test-more]"]
+deprecated = ["openctm"]
+easy = ["charset-normalizer", "colorlog", "embreex", "httpx", "jsonschema", "lxml", "manifold3d (>=2.3.0)", "mapbox_earcut (>=1.0.2)", "networkx", "pillow", "pycollada", "pycollada (<=0.9.0)", "rtree", "scipy", "shapely", "svg.path", "vhacdx", "xxhash"]
+recommend = ["cascadio", "fast-simplification", "manifold3d (>=2.3.0)", "pyglet (<2)", "python-fcl", "scikit-image", "sympy"]
+test = ["pyinstrument", "pytest", "pytest-cov", "ruff"]
+test-more = ["coveralls", "ezdxf", "ipython", "marimo", "matplotlib", "meshio", "pymeshlab", "pytest-beartype", "triangle", "xatlas"]
 
 [[package]]
 name = "typing-extensions"
@@ -1402,4 +1403,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "adeeca926e1b006f7a8dcb74d09e69c79b034bdf3f6e0039ba33225d6cdb5bae"
+content-hash = "14beefebaccad14bf9de47d2e0a4d613ccbdf5d2fc4a33481658b1188efa0be7"
